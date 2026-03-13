@@ -1,0 +1,150 @@
+\documentclass[12pt,italian]{article}
+\usepackage[italian]{babel}
+\usepackage[a4paper, margin=1.97cm]{geometry}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+\usepackage{amsmath}
+\usepackage[american]{circuitikz}
+\usepackage{caption}
+\usepackage{subcaption}
+\numberwithin{table}{section}
+\usepackage{amsfonts}
+\usepackage[bookmarks,pdfusetitle,hidelinks]{hyperref}
+\makeatletter
+\let\oldsection\section
+\renewcommand{\section}{\@ifstar{\@mystarsection}{\@mynormsection}}
+\newcommand{\@mystarsection}[1]{%
+    \oldsection*{#1}%
+    \phantomsection%
+    \addcontentsline{toc}{section}{#1}%
+}
+\newcommand{\@mynormsection}[2][]{%
+    \if\relax\detokenize{#1}\relax
+        \oldsection{#2}%
+    \else
+        \oldsection[#1]{#2}%
+    \fi
+}
+\makeatother
+\usepackage{cleveref}
+\usepackage{siunitx}
+\usepackage{booktabs}
+
+\newcommand{\err}[1]{\textcolor{red}{#1}}
+
+
+\title{Misure su un circuito tosatore a due livelli.}
+\author{Enrico Barbuio \\ 0001117553 \and Giacomo Cicala \\ 0001122965} 
+\date{Turno 1 del 12 Marzo 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+\section*{Introduzione}
+
+\section*{Apparato sperimentale e svolgimento}
+Il materiale utilizzato nella prova consiste in:\\
+Strumenti:
+\begin{itemize}
+	\item Generatore di tensione costante (modello \texttt{TTi EB2025T}) con uscite
+	      impostate a \qty{+5}{\volt} e \qty{-5}{\volt}.
+	\item Generatore di funzioni (\err{???}).
+	\item Oscilloscopio (\err{???}).
+	\item Multimetro \texttt{Fluke 175 True RMS Multimeter}.
+\end{itemize}
+Componenti:
+\begin{itemize}
+	\item Potenziometro \qty{50}{\kilo\ohm} ($R$)
+	\item 2x Potenziometri \qty{1}{\kilo\ohm} ($R_1$ e $R_2$)
+	\item 2x Diodi al silicio / 2x Diodi al germanio ($D_1$ e $D_2$).
+\end{itemize}
+
+\begin{figure}[h]
+	\centering
+	\begin{circuitikz}
+		\coordinate (start) at (0,0);
+		\node[ground] at (start) {};
+
+		\draw (start) to[sinusoidal voltage source, l={$V_{in}$}] ++(0, 2)
+         to[variable resistor, l={$R$}] ++(0, 2) coordinate (top_left);
+
+		\draw (top_left) -- ++(11, 0) coordinate (top_right);
+		\draw (start) -- ++(11, 0) coordinate (bot_right);
+		\draw (bot_right) to[oscope, l_={$V_{out}$}] (top_right);
+
+        % tosatore 1
+		\draw (start) ++(3, 1.5) coordinate (R1_left) to[battery2, v_=\qty{5}{\volt}] ++(0, -1.5);
+
+		\draw (R1_left) to[pR, name=pot1, l_={$R_1$}] ++(2, 0) coordinate (R1_right);
+		\draw (R1_right) -| ++(0, -1.5);
+
+		\draw (pot1.wiper) to[short, -o] ++(0.75,0) node[right]{$V_{R1}$};
+		\draw (pot1.wiper |- top_left) to[full diode, l=$D_1$] (pot1.wiper);
+
+        % tosatore 2
+		\draw (start) ++(6, 0) -| ++(0, 1.5) coordinate (R2_left);
+		\draw (R2_left) to[pR, name=pot2, l_={$R_2$}] ++(2, 0) coordinate (R2_right);
+
+		\draw (start) ++(8, 0) to[battery2, v_=\qty{-5}{\volt}] (R2_right);
+
+		\draw (pot2.wiper) to[short, -o] ++(0.75,0) node[right]{$V_{R2}$};
+		\draw (pot2.wiper) to[full diode, l_=$D_2$] (pot2.wiper |- top_left);
+	\end{circuitikz}
+	\caption{Schema del circuito realizzato.}
+	\label{fig:schema_circuito}
+\end{figure}
+
+Descriviamo la realizzazione del circuito in \cref{fig:schema_circuito}.
+Il potenziometro $R$ è stato usato come una resistenza utilizzando due dei tre
+piedini, è stato impostato a $(40.0 \pm 0.4)$ \unit{\kilo\ohm}.
+Successivamente, variando i potenziometri $R_1$ e $R_2$ sono state impostate le
+tensioni $V_{R1}$ e $V_{R2}$ a: $V_{R1} = (2.004 \pm 0.005)$ \unit{\volt} e 
+ $V_{R2} = (-2.004 \pm 0.005)$ \unit{\volt}.
+
+Dopodiché sono stati collegati l'oscilloscopio e il generatore di funzioni.
+Il generatore di funzioni è stato impostato con una forma sinusoidale,
+frequenza di \qty{1}{\kilo\hertz} e semiampiezza \qty{6}{\volt}.
+Per conferma questi parametri sono stati misurati con l'oscilloscopio ottenendo:
+\[
+    V_{in, 0} = (6.0 \pm 0.1) \ \unit{\volt},
+    \qquad \tau = (1.00 \pm 0.04) \ \unit{\milli\second} \quad \Rightarrow \quad
+    \nu = (1.00 \pm 0.04 ) \ \unit{\kilo\hertz}.
+\]
+A questo punto è stata osservata sull'oscilloscopio la forma dell'onda tosata e
+sono state svolte le misure dei tempi di salita e discesa.\err{descrivere?}
+
+L'esperienza è stata ripetuta, prima con due diodi al silicio e poi con due
+diodi al germanio.
+
+Rimanendo poi con i diodi al silicio sono state fatte altre due prove.
+Prima è stata abbassata la tensione $V_{R1}$, responsabile del clipping
+superiore, a $(1.002 \pm 0.004)$ \unit{\volt}.
+Infine, riportando $V_{R1}$ al valore iniziale, è stata misurata la resistenza
+critica $R_c$,
+ovvero il valore di $R$ per cui si inizia ad osservare una diminuzione
+dell'effetto di taglio sull'onda sinusoidale.
+Come valore di soglia è stata considerata una variazione del picco di una
+tacchetta dell'oscilloscopio nella scala \err{??? \unit {\volt}}.
+
+\section*{Risultati e discussione}
+\section*{Conclusioni}
+
+\appendix
+\section*{Errori per le misure con l'oscilloscopio}
+\err{non penso serva una sezione ma per ora li metto qua.}
+
+Assumiamo innanzitutto di apprezzare la mezza tacca dell'oscilloscopio,
+l'errore su ciascuna lettura sarà quindi $\Delta_i = \frac{{\text{F.S.}}_i}{2}$.
+Le misure svolte con l'oscilloscopio sono sempre delle delta tra due valori per
+cui l'incertezza totale è $\Delta = \Delta_1 + \Delta_2$.
+Quando entrambe le misure vengono effettuate sulla stessa scala risulta
+$\Delta = 2 \cdot \frac{\text{F.S.}}{2} = \text{F.S.}$.
+Invece, nel caso di misure di tensione in riferimento alla massa, è stato
+azzerato l'oscilloscopio con fondoscala di \qty{0.04}{\volt}, questo errore è
+sempre ordini di grandezza inferiore all'errore sull'altra misura per cui:
+$\Delta = \Delta_{GND} + \Delta_{val} \approx \Delta_{val}$.
+\end{document}
