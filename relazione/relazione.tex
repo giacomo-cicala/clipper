@@ -52,8 +52,8 @@
 	discesa del segnale.
 	\[
 		V^{pre} = (6.0 \pm 0.1) \ \unit{\volt}, \qquad
-		V^{post}_{Si} = (2.50 \pm 0.05) \ \unit{\volt}, \qquad
-		V^{post}_{Ge} = (2.20 \pm 0.05) \ \unit{\volt}.
+		V_{Si} = (2.50 \pm 0.05) \ \unit{\volt}, \qquad
+		V_{Ge} = (2.20 \pm 0.05) \ \unit{\volt}.
 	\]
 	\[
 		t^{rise}_{Si} = (53 \pm 2) \ \unit{\micro\second} \qquad
@@ -63,8 +63,8 @@
 		t^{rise}_{Ge} = (47 \pm 2) \ \unit{\micro\second} \qquad
 		t^{fall}_{Ge} = (47 \pm 2) \ \unit{\micro\second}
 	\]
-	Queste misure hanno confermato il taglio maggiore dei diodi al germanio dovuto
-	alla $V_\gamma$ inferiore. Si è verificato che l'ampiezza di taglio varia
+	\err{Queste misure hanno confermato il taglio maggiore dei diodi al germanio dovuto
+	alla $V_\gamma$ inferiore}. Si è verificato che l'ampiezza di taglio varia
 	proporzionalmente alla tensione $V_R$ di alimentazione del diodo. Infine è
 	stata stimata la resistenza critica $R_c = (25.8 \pm 0.2) \ \unit{\kilo\ohm}$
 	sul ramo di input per cui inizia a diminuire l'effetto di clipping.
@@ -211,7 +211,7 @@ impostate le tensioni che regolano la soglia di clipping ($V_{R1}$ e $V_{R2}$)
 a: $V_{R1} = (2.004 \pm 0.005)$ \unit{\volt} e $V_{R2} = (-2.004 \pm 0.005)$
 \unit{\volt}. \`E stata quindi osservata sull'oscilloscopio la forma dell'onda
 tosata (\cref{fig:onda}) e sono state svolte le misure di semiampiezza
-dell'onda e dei tempi di salita e discesa. \err{descrivere?} L'esperienza è
+dell'onda e dei tempi di salita e discesa. L'esperienza è
 stata ripetuta, prima con due diodi al silicio e poi con due diodi al germanio.
 
 \begin{figure}[h]
@@ -240,10 +240,10 @@ risultata:
 \[
 	V^{pre} = (6.0 \pm 0.1) \ \unit{\volt},
 \]
-mentre quelle post-clipping per silicio e germanio sono risultate:
+mentre quelle post-clipping per silicio e germanio (omettendo l'apice) sono risultate:
 \[
-	V^{post}_{Si} = (2.50 \pm 0.05) \ \unit{\volt} \qquad
-	V^{post}_{Ge} = (2.20 \pm 0.05) \ \unit{\volt}.
+	V_{Si} = (2.50 \pm 0.05) \ \unit{\volt} \qquad
+	V_{Ge} = (2.20 \pm 0.05) \ \unit{\volt}.
 \]
 Ricordando che nell'approssimazione $R \gg R_f$, $V_{out} = V_R + V_{\gamma}$,
 si possono ricavare $V_\gamma^{Si}$ e $V_\gamma^{Ge}$:
@@ -255,8 +255,8 @@ si possono ricavare $V_\gamma^{Si}$ e $V_\gamma^{Ge}$:
 a quelli al silicio. Ciò segue naturalmente dal fatto che la tensione di soglia
 $V_{\gamma}$ dei diodi al germanio è più bassa rispetto a quella dei diodi al
 silicio.
-Come ulteriore confema le tensioni di soglia ottenute sono compatibili con i
-valori noti per queste tipologie di diodo. \err{cita?}
+\err{Come ulteriore confema le tensioni di soglia ottenute sono compatibili con i
+valori noti per queste tipologie di diodo. cita?}
 
 Per quanto riguarda i tempi di salita e discesa, sono risultati:
 \[
@@ -281,14 +281,14 @@ Consideriamo ora il setup con $V_{R1} \simeq 1$ \unit{\volt} e $V_{R2} \simeq
 	-2$ \unit{\volt}. In questo caso la semiampiezza positiva e quella negativa
 post-clipping per il silicio sono risultate:
 \[
-	V^{post}_{Si, +} = (1.55 \pm 0.05) \ \unit{\volt} \qquad
-	V^{post}_{Si, -} = (2.55 \pm 0.05) \ \unit{\volt}.
+	V_{Si, +} = (1.55 \pm 0.05) \ \unit{\volt} \qquad
+	V_{Si, -} = (2.55 \pm 0.05) \ \unit{\volt}.
 \]
 Confrontando le due misure con quelle ottenute con il setup precedente, notiamo
 come la diminuzione della semiampiezza positiva sia compatibile con la
 diminuzione della tensione sulla resistenza $R_1$:
 \[
-	\Delta V^{post}_{Si, +} = (-0.95 \pm 0.07) \ \unit{\volt} \qquad
+	\Delta V_{Si, +} = (-0.95 \pm 0.07) \ \unit{\volt} \qquad
 	\Delta V_{R1} = (-1.002 \pm 0.006) \ \unit{\volt},
 \]
 mentre la semiampiezza negativa è rimasta compatibile con quella ottenuta in
@@ -314,8 +314,8 @@ di taglio sull'onda sinusoidale.
 Abbiamo ottenuto i risultati attesi, osservando che i diodi al germanio
 effettuano una tosatura maggiore rispetto a quelli al silicio:
 \[
-	V^{post}_{Si} = (2.50 \pm 0.05) \ \unit{\volt} \qquad
-	V^{post}_{Ge} = (2.20 \pm 0.05) \ \unit{\volt}
+	V_{Si} = (2.50 \pm 0.05) \ \unit{\volt} \qquad
+	V_{Ge} = (2.20 \pm 0.05) \ \unit{\volt}
 \]
 e che i tempi di salita e discesa per i diodi al germanio risultano più brevi
 rispetto a quelli dei diodi al silicio:
@@ -330,14 +330,14 @@ rispetto a quelli dei diodi al silicio:
 Inoltre, abbiamo osservato come la diminuzione della semiampiezza positiva sia
 compatibile con la diminuzione della tensione sulla resistenza $R_1$:
 \[
-	\Delta V^{post}_{Si, +} = (-0.95 \pm 0.07) \ \unit{\volt} \qquad
+	\Delta V_{Si, +} = (-0.95 \pm 0.07) \ \unit{\volt} \qquad
 	\Delta V_{R1} = (-1.002 \pm 0.006) \ \unit{\volt},
 \]
 mentre la semiampiezza negativa è rimasta compatibile con quella ottenuta in
 precedenza:
 \[
-	V^{post}_{Si} = (2.50 \pm 0.05) \ \unit{\volt} \qquad
-	V^{post}_{Si, -} = (2.55 \pm 0.05) \ \unit{\volt}.
+	V_{Si} = (2.50 \pm 0.05) \ \unit{\volt} \qquad
+	V_{Si, -} = (2.55 \pm 0.05) \ \unit{\volt}.
 \]
 Infine, abbiamo misurato la resistenza critica $R_c$ in cui si inizia ad
 osservare una diminuzione dell'effetto di taglio sull'onda sinusoidale:
