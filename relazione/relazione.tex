@@ -31,6 +31,8 @@
 \usepackage{booktabs}
 
 \newcommand{\err}[1]{\textcolor{red}{#1}}
+\newcommand{\sposta}[1]{\textcolor{blue}{#1}}
+
 
 
 \title{Misure su un circuito tosatore a due livelli}
@@ -42,29 +44,43 @@
 \maketitle
 
 \begin{abstract}
+	\`E stato realizzato un circuito tosatore a due livelli per ricavare un onda
+	quadra analogica a partire da un onda sinusoidale.
+	Il circuito è stato realizzato in due varianti: con diodi al silicio e con
+	diodi al germanio.
+	Sono state misurate le semiampiezze pre e post clipping e i tempi di salita e
+	discesa del segnale.
+	\[
+		V^{pre} = (6.0 \pm 0.1) \ \unit{\volt}, \qquad
+		V^{post}_{Si} = (2.50 \pm 0.05) \ \unit{\volt}, \qquad
+		V^{post}_{Ge} = (2.20 \pm 0.05) \ \unit{\volt}.
+	\]
+	\[
+		t^{rise}_{Si} = (53 \pm 2) \ \unit{\micro\second} \qquad
+		t^{fall}_{Si} = (54 \pm 2) \ \unit{\micro\second}
+	\]
+	\[
+		t^{rise}_{Ge} = (47 \pm 2) \ \unit{\micro\second} \qquad
+		t^{fall}_{Ge} = (47 \pm 2) \ \unit{\micro\second}
+	\]
+	Queste misure hanno confermato il taglio maggiore dei diodi al germanio dovuto
+	alla $V_\gamma$ inferiore. Si è verificato che l'ampiezza di taglio varia
+	proporzionalmente alla tensione $V_R$ di alimentazione del diodo. Infine è
+	stata stimata la resistenza critica $R_c = (25.8 \pm 0.2) \ \unit{\kilo\ohm}$
+	sul ramo di input per cui inizia a diminuire l'effetto di clipping.
 
 \end{abstract}
-\section*{Introduzione}
-I circuiti tosatori (di clipping) sono circuiti che limitano la tensione di uscita a un certo intervallo, tagliando le parti dell'onda entrante al di sotto o al di sopra di determinate soglie. In questa esperienza abbiamo realizzato un circuito tosatore a due livelli utilizzando diodi al silicio e al germanio, e abbiamo effettuato misure di grandezze caratteristiche del circuito come i tempi di salita e discesa, semiampiezze pre e post clipping per diversi valori di resistenza sui potenziometri, e la resistenza critica oltre la quale si inizia
-ad osservare una diminuzione dell'effetto di taglio sull'onda sinusoidale.
-\section*{Apparato sperimentale e svolgimento}
-\err{mettere immagini (possiamo copiare tutto uguale alla scorsa relazione)}
 
-Il materiale utilizzato nella prova consiste in:\\
-Strumenti:
-\begin{itemize}
-	\item Generatore di tensione costante (modello \texttt{TTi EB2025T}) con uscite
-	      impostate a \qty{+5}{\volt} e \qty{-5}{\volt}.
-	\item Generatore di funzioni (\err{???}).
-	\item Oscilloscopio (\err{???}).
-	\item Multimetro \texttt{Fluke 175 True RMS Multimeter}.
-\end{itemize}
-Componenti:
-\begin{itemize}
-	\item Potenziometro \qty{50}{\kilo\ohm} ($R$)
-	\item 2x Potenziometri \qty{1}{\kilo\ohm} ($R_1$ e $R_2$)
-	\item 2x Diodi al silicio / 2x Diodi al germanio ($D_1$ e $D_2$).
-\end{itemize}
+\section*{Introduzione}
+I circuiti tosatori (di clipping) sono circuiti che limitano la tensione di
+uscita a un certo intervallo, tagliando le parti dell'onda entrante al di sotto
+o al di sopra di determinate soglie. In questa esperienza abbiamo realizzato un
+circuito tosatore a due livelli utilizzando diodi al silicio e al germanio, e
+abbiamo effettuato misure di grandezze caratteristiche del circuito come i
+tempi di salita e discesa, semiampiezze pre e post clipping per diversi valori
+di resistenza sui potenziometri, e la resistenza critica oltre la quale si
+inizia ad osservare una diminuzione dell'effetto di taglio sull'onda
+sinusoidale.
 
 \begin{figure}[h]
 	\centering
@@ -73,13 +89,13 @@ Componenti:
 		\node[ground] at (start) {};
 
 		\draw (start) to[sinusoidal voltage source, l={$V_{in}$}] ++(0, 2)
-         to[variable resistor, l={$R$}] ++(0, 2) coordinate (top_left);
+		to[variable resistor, l={$R$}] ++(0, 2) coordinate (top_left);
 
 		\draw (top_left) -- ++(11, 0) coordinate (top_right);
 		\draw (start) -- ++(11, 0) coordinate (bot_right);
 		\draw (bot_right) to[oscope, l_={$V_{out}$}] (top_right);
 
-        % tosatore 1
+		% tosatore 1
 		\draw (start) ++(3, 1.5) coordinate (R1_left) to[battery2, v_=\qty{5}{\volt}] ++(0, -1.5);
 
 		\draw (R1_left) to[pR, name=pot1, l_={$R_1$}] ++(2, 0) coordinate (R1_right);
@@ -88,7 +104,7 @@ Componenti:
 		\draw (pot1.wiper) to[short, -o] ++(0.75,0) node[right]{$V_{R1}$};
 		\draw (pot1.wiper |- top_left) to[full diode, l=$D_1$] (pot1.wiper);
 
-        % tosatore 2
+		% tosatore 2
 		\draw (start) ++(6, 0) -| ++(0, 1.5) coordinate (R2_left);
 		\draw (R2_left) to[pR, name=pot2, l_={$R_2$}] ++(2, 0) coordinate (R2_right);
 
@@ -101,51 +117,146 @@ Componenti:
 	\label{fig:schema_circuito}
 \end{figure}
 
-Descriviamo la realizzazione del circuito in \cref{fig:schema_circuito}.
-Il potenziometro $R$ è stato usato come una resistenza utilizzando due dei tre
-piedini, è stato impostato a $(40.0 \pm 0.4)$ \unit{\kilo\ohm}.
-Successivamente, variando i potenziometri $R_1$ e $R_2$ sono state impostate le
-tensioni $V_{R1}$ e $V_{R2}$ a: $V_{R1} = (2.004 \pm 0.005)$ \unit{\volt} e 
- $V_{R2} = (-2.004 \pm 0.005)$ \unit{\volt}.
-
-Dopodiché sono stati collegati l'oscilloscopio e il generatore di funzioni.
-Il generatore di funzioni è stato impostato con una forma sinusoidale,
-frequenza di \qty{1}{\kilo\hertz} e semiampiezza \qty{6}{\volt}.
-Per conferma questi parametri sono stati misurati con l'oscilloscopio ottenendo:
+Per capire il funzionamento del circuito (\cref{fig:schema_circuito})
+consideriamo il ramo con $D_1$ e $V_{R1}$, responsabile del taglio superiore.
+Quando $V_{in} < V_{R1} + V_\gamma$ il diodo è polarizzato inversamente per cui
+non scorre corrente e il segnale viene trasmesso inalterato. Quando $V_{in} >
+	V_{R1} + V_\gamma$ il diodo si polarizza direttamente, scorre corrente
+attraverso il ramo e quindi si ha una caduta di tensione sulla resistenza $R$
+che causa il taglio su $V_{out}$. La tensione in uscita è quindi descritta da
 \[
-    V_{in, 0} = (6.0 \pm 0.1) \ \unit{\volt},
-    \qquad \tau = (1.00 \pm 0.04) \ \unit{\milli\second} \quad \Rightarrow \quad
-    \nu = (1.00 \pm 0.04 ) \ \unit{\kilo\hertz}.
+	V_{out} =
+	\begin{cases}
+		V_{in}                                                                    & \text{se } V_{in} < V_{R1} + V_\gamma \\
+		V_{in} \frac{R_f}{R + R_f} + (V_{R1} + V_\gamma)(1 - \frac{R_f}{R + R_f}) & \text{se } V_{in} > V_{R1} + V_\gamma
+	\end{cases}
+	\approx
+	\begin{cases}
+		V_{in}            & \text{se } V_{in} < V_{R1} + V_\gamma \\
+		V_{R1} + V_\gamma & \text{se } V_{in} > V_{R1} + V_\gamma
+	\end{cases}.
 \]
-A questo punto è stata osservata sull'oscilloscopio la forma dell'onda tosata e
-sono state svolte le misure dei tempi di salita e discesa.\err{descrivere?}
+La stessa cosa accade specularmente sul ramo con $D_2$ e $V_{R2}$, responsabile
+del taglio inferiore.
 
-L'esperienza è stata ripetuta, prima con due diodi al silicio e poi con due
-diodi al germanio.
+\section*{Apparato sperimentale e svolgimento}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[b]{0.24\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{images/gen.png}
+		\caption{Alimentatore}
+		\label{fig:alimentatore}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.24\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{images/func_gen.png}
+		\caption{Generatore di funzioni}
+		\label{fig:func_gen}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.24\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{images/oscilloscopio.png}
+		\caption{Oscilloscopio}
+		\label{fig:oscilloscopio}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.19\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{images/multimetro.png}
+		\caption{Multimetro}
+		\label{fig:multimetro}
+	\end{subfigure}
+	\caption{Strumentazione usata nell'apparato sperimentale:
+		(a) Alimentatore \texttt{TTi EB2025T};
+		(b) Generatore di funzioni \texttt{TTi TG315};
+		(c) Oscilloscopio \texttt{GW Instek GOS-652G};
+		(d) Multimetro \texttt{Fluke 175 True RMS Multimeter}.}
+	\label{fig:strumentazione}
+\end{figure}
 
-Rimanendo poi con i diodi al silicio sono state fatte altre due prove.
-Prima è stata abbassata la tensione $V_{R1}$, responsabile del clipping
-superiore, a $(1.002 \pm 0.004)$ \unit{\volt}.
-Infine, riportando $V_{R1}$ al valore iniziale, è stata misurata la resistenza
-critica $R_c$,
-ovvero il valore di $R$ per cui si inizia ad osservare una diminuzione
-dell'effetto di taglio sull'onda sinusoidale.
-Come valore di soglia è stata considerata una variazione del picco di una
-tacchetta dell'oscilloscopio nella scala \err{??? \unit {\volt}}.
+Il materiale utilizzato nella prova consiste in:\\ Strumenti
+(\cref{fig:strumentazione}):
+\begin{itemize}
+	\item Generatore di tensione costante (modello \texttt{TTi EB2025T}) con uscite
+	      impostate a \qty{+5}{\volt} e \qty{-5}{\volt}.
+	\item Generatore di funzioni \texttt{TTi TG315}.
+	\item Oscilloscopio \texttt{GW Instek GOS-652G}.
+	\item Multimetro \texttt{Fluke 175 True RMS Multimeter}.
+\end{itemize}
+Componenti:
+\begin{itemize}
+	\item Potenziometro \qty{50}{\kilo\ohm} ($R$)
+	\item 2x Potenziometri \qty{1}{\kilo\ohm} ($R_1$ e $R_2$)
+	\item 2x Diodi al silicio / 2x Diodi al germanio ($D_1$ e $D_2$).
+\end{itemize}
+
+Descriviamo la realizzazione del circuito in \cref{fig:schema_circuito}. Il
+potenziometro $R$ è stato usato come una resistenza utilizzando due dei tre
+piedini, è stato impostato a $(40.0 \pm 0.4)$ \unit{\kilo\ohm}. Successivamente
+sono stati collegati l'oscilloscopio e il generatore di funzioni. Il generatore
+di funzioni è stato impostato con una forma sinusoidale, frequenza di
+\qty{1}{\kilo\hertz} e semiampiezza \qty{6}{\volt}. Per conferma questi
+parametri sono stati misurati con l'oscilloscopio ottenendo:
+\[
+	V_{in, 0} = (6.0 \pm 0.1) \ \unit{\volt},
+	\qquad \tau = (1.00 \pm 0.04) \ \unit{\milli\second} \quad \Rightarrow \quad
+	\nu = (1.00 \pm 0.04 ) \ \unit{\kilo\hertz}.
+\]
+A questo punto sono stati inseriti i due rami di clipping con i diodi $D_1$ e
+$D_2$; a questo punto variando i potenziometri $R_1$ e $R_2$ sono state
+impostate le tensioni che regolano la soglia di clipping ($V_{R1}$ e $V_{R2}$)
+a: $V_{R1} = (2.004 \pm 0.005)$ \unit{\volt} e $V_{R2} = (-2.004 \pm 0.005)$
+\unit{\volt}. \`E stata quindi osservata sull'oscilloscopio la forma dell'onda
+tosata (\cref{fig:onda}) e sono state svolte le misure di semiampiezza
+dell'onda e dei tempi di salita e discesa. \err{descrivere?} L'esperienza è
+stata ripetuta, prima con due diodi al silicio e poi con due diodi al germanio.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{onda1.jpg}
+	\caption{Forma dell'onda tosata con diodi al silicio e $V_{R1} = |V_{R2}| =
+		2 \unit{\volt}$. Parametri oscilloscopio: \qty{1}{\volt\per div},
+        \qty{0.2}{\milli\second\per div}.}
+	\label{fig:onda}
+\end{figure}
+
+Rimanendo poi con i diodi al silicio sono state fatte altre due prove. Prima è
+stata abbassata la tensione $V_{R1}$, responsabile del clipping superiore, a
+$(1.002 \pm 0.004)$ \unit{\volt}. Infine, riportando $V_{R1}$ al valore
+iniziale, è stata misurata la resistenza critica $R_c$, ovvero il valore di $R$
+per cui si inizia ad osservare una diminuzione dell'effetto di taglio sull'onda
+sinusoidale. Come valore di soglia è stata considerata una variazione del picco
+di una tacchetta dell'oscilloscopio nella scala \qty{0.5}{\volt\per div}, ossia
+una variazione di \qty{0.1}{\volt}.
 
 \section*{Risultati e discussione}
-\err{inserire tabella misure con FS e time/div?}
 
-Consideriamo il setup dove $V_{R1} \simeq 2$ \unit{\volt} e $V_{R2} \simeq -2$ \unit{\volt}. Per quanto riguarda le semiampiezze, quella pre-clipping è risultata:
+Consideriamo il setup dove $V_{R1} \simeq 2$ \unit{\volt} e $V_{R2} \simeq -2$
+\unit{\volt}. Per quanto riguarda le semiampiezze, quella pre-clipping è
+risultata:
 \[
-	V^{pre} = (6.0 \pm 0.1) \ \unit{\volt}
+	V^{pre} = (6.0 \pm 0.1) \ \unit{\volt},
 \]
- mentre quelle post-clipping per silicio e germanio sono risultate:
+mentre quelle post-clipping per silicio e germanio sono risultate:
 \[
 	V^{post}_{Si} = (2.50 \pm 0.05) \ \unit{\volt} \qquad
-	V^{post}_{Ge} = (2.20 \pm 0.05) \ \unit{\volt}
+	V^{post}_{Ge} = (2.20 \pm 0.05) \ \unit{\volt}.
 \]
-Confrontando le misure, possiamo notare come i diodi al germanio effettuino una tosatura maggiore rispetto a quelli al silicio. Ciò si può spiegare ricordando che la tensione di soglia $V_{\gamma}$ dei diodi al germanio è più bassa rispetto a quella dei diodi al silicio e che la caratteristica ideale nel tratto di tosatura è $ V_{out} = V_R + V_{\gamma}$.
+Ricordando che nell'approssimazione $R \gg R_f$, $V_{out} = V_R + V_{\gamma}$,
+si possono ricavare $V_\gamma^{Si}$ e $V_\gamma^{Ge}$:
+\[
+	V_\gamma^{Si} = (0.50 \pm 0.06) \ \unit{\volt} \qquad
+	V_\gamma^{Ge} = (0.20 \pm 0.06) \ \unit{\volt}.
+\]
+\`E chiaro che i diodi al germanio effettuano una tosatura maggiore rispetto
+a quelli al silicio. Ciò segue naturalmente dal fatto che la tensione di soglia
+$V_{\gamma}$ dei diodi al germanio è più bassa rispetto a quella dei diodi al
+silicio.
+Come ulteriore confema le tensioni di soglia ottenute sono compatibili con i
+valori noti per queste tipologie di diodo. \err{cita?}
 
 Per quanto riguarda i tempi di salita e discesa, sono risultati:
 \[
@@ -154,42 +265,60 @@ Per quanto riguarda i tempi di salita e discesa, sono risultati:
 \]
 \[
 	t^{rise}_{Ge} = (47 \pm 2) \ \unit{\micro\second} \qquad
-	t^{fall}_{Ge} = (47 \pm 2) \ \unit{\micro\second}
+	t^{fall}_{Ge} = (47 \pm 2) \ \unit{\micro\second}.
 \]
-Confrontando le misure otteniamo immediatamente che i tempi di salita e discesa per ciascun diodo risultano compatibili tra loro, come ci si aspetta dato che il circuito è simmetrico. Inoltre, i tempi di salita e discesa per i diodi al germanio risultano più brevi rispetto a quelli dei diodi al silicio. Ciò si può spiegare ricordando che il germanio, tosando di più, taglia una porzione maggiore dell'onda sinusoidale, e quindi la regione di salita e discesa sono minori rispetto a quella dei diodi al silicio, per cui i tempi di salita e discesa risultano più brevi.
 
-Consideriamo ora il setup con $V_{R1} \simeq 1$ \unit{\volt} e $V_{R2} \simeq -2$ \unit{\volt}.
-In questo caso la semiampiezza positiva e quella negativa  post-clipping per il silicio sono risultate:
+Confrontando le misure otteniamo immediatamente che i tempi di salita e discesa
+per ciascun diodo risultano compatibili tra loro, come ci si aspetta dato che
+il circuito è simmetrico. Inoltre, i tempi di salita e discesa per i diodi al
+germanio risultano più brevi rispetto a quelli dei diodi al silicio. Ciò si può
+spiegare ricordando che il germanio, tosando di più, taglia una porzione
+maggiore dell'onda sinusoidale, e quindi la regione di salita e discesa sono
+minori rispetto a quella dei diodi al silicio, per cui i tempi di salita e
+discesa risultano più brevi.
+
+Consideriamo ora il setup con $V_{R1} \simeq 1$ \unit{\volt} e $V_{R2} \simeq
+	-2$ \unit{\volt}. In questo caso la semiampiezza positiva e quella negativa
+post-clipping per il silicio sono risultate:
 \[
 	V^{post}_{Si, +} = (1.55 \pm 0.05) \ \unit{\volt} \qquad
 	V^{post}_{Si, -} = (2.55 \pm 0.05) \ \unit{\volt}.
 \]
-Confrontando le due misure con quelle ottenute con il setup precedente, notiamo come la diminuzione della semiampiezza positiva sia compatibile con la diminuzione della tensione sulla resistenza $R1$:
+Confrontando le due misure con quelle ottenute con il setup precedente, notiamo
+come la diminuzione della semiampiezza positiva sia compatibile con la
+diminuzione della tensione sulla resistenza $R_1$:
 \[
-\Delta V^{post}_{Si, +} = (-0.95 \pm 0.07) \ \unit{\volt} \qquad 
-\Delta V_{R1} = (-1.002 \pm 0.006) \ \unit{\volt},
+	\Delta V^{post}_{Si, +} = (-0.95 \pm 0.07) \ \unit{\volt} \qquad
+	\Delta V_{R1} = (-1.002 \pm 0.006) \ \unit{\volt},
 \]
-mentre la semiampiezza negativa è rimasta compatibile con quella ottenuta in precedenza. Ciò si spiega sempre ricordando che
+mentre la semiampiezza negativa è rimasta compatibile con quella ottenuta in
+precedenza. Ciò si spiega sempre ricordando che
 \begin{equation*}
 	V_{out} = V_R + V_{\gamma} \quad \rightarrow  \quad \Delta V_{out} = \Delta V_R
-\end{equation*} 
+\end{equation*}
 
 Infine, la resistenza critica $R_c$ è risultata:
 \[
 	R_c = (25.8 \pm 0.2) \ \unit{\kilo\ohm}
 \]
-Qualitativamente, possiamo affermare che questa misura riflette il punto in cui l'approssimazione
+Qualitativamente, possiamo affermare che questa misura riflette il punto in cui
+l'approssimazione
 \[
-\frac{R_D}{R + R_D	} \approx 0 \qquad R_D = \text{resistenza dinamica del diodo}
+	\frac{R_D}{R + R_D	} \approx 0 \qquad R_D = \text{resistenza dinamica del diodo}
 \]
-non è più valida, e quindi si inizia ad osservare una diminuzione dell'effetto di taglio sull'onda sinusoidale. \err{mettere anche eq. iniziale senza approssimazione?}
+non è più valida, e quindi si inizia ad osservare una diminuzione dell'effetto
+di taglio sull'onda sinusoidale.
+
 \section*{Conclusioni}
-Abbiamo ottenuto i risultati attesi, osservando che i diodi al germanio effettuano una tosatura maggiore rispetto a quelli al silicio:
+
+Abbiamo ottenuto i risultati attesi, osservando che i diodi al germanio
+effettuano una tosatura maggiore rispetto a quelli al silicio:
 \[
 	V^{post}_{Si} = (2.50 \pm 0.05) \ \unit{\volt} \qquad
 	V^{post}_{Ge} = (2.20 \pm 0.05) \ \unit{\volt}
 \]
-e che i tempi di salita e discesa per i diodi al germanio risultano più brevi rispetto a quelli dei diodi al silicio:
+e che i tempi di salita e discesa per i diodi al germanio risultano più brevi
+rispetto a quelli dei diodi al silicio:
 \[
 	t^{rise}_{Si} = (53 \pm 2) \ \unit{\micro\second} \qquad
 	t^{fall}_{Si} = (54 \pm 2) \ \unit{\micro\second}
@@ -198,33 +327,37 @@ e che i tempi di salita e discesa per i diodi al germanio risultano più brevi r
 	t^{rise}_{Ge} = (47 \pm 2) \ \unit{\micro\second} \qquad
 	t^{fall}_{Ge} = (47 \pm 2) \ \unit{\micro\second}
 \]
-Inoltre, abbiamo osservato come la diminuzione della semiampiezza positiva sia compatibile con la diminuzione della tensione sulla resistenza $R1$:
+Inoltre, abbiamo osservato come la diminuzione della semiampiezza positiva sia
+compatibile con la diminuzione della tensione sulla resistenza $R_1$:
 \[
-\Delta V^{post}_{Si, +} = (-0.95 \pm 0.07) \ \unit{\volt} \qquad 
-\Delta V_{R1} = (-1.002 \pm 0.006) \ \unit{\volt},
+	\Delta V^{post}_{Si, +} = (-0.95 \pm 0.07) \ \unit{\volt} \qquad
+	\Delta V_{R1} = (-1.002 \pm 0.006) \ \unit{\volt},
 \]
-mentre la semiampiezza negativa è rimasta compatibile con quella ottenuta in precedenza:
+mentre la semiampiezza negativa è rimasta compatibile con quella ottenuta in
+precedenza:
 \[
 	V^{post}_{Si} = (2.50 \pm 0.05) \ \unit{\volt} \qquad
 	V^{post}_{Si, -} = (2.55 \pm 0.05) \ \unit{\volt}.
 \]
-Infine, abbiamo misurato la resistenza critica $R_c$ in cui si inizia ad osservare una diminuzione dell'effetto di taglio sull'onda sinusoidale:
+Infine, abbiamo misurato la resistenza critica $R_c$ in cui si inizia ad
+osservare una diminuzione dell'effetto di taglio sull'onda sinusoidale:
 \[
-	R_c = (25.8 \pm 0.2) \ \unit{\kilo\ohm}
-\].
+	R_c = (25.8 \pm 0.2) \ \unit{\kilo\ohm}.
+\]
 
 \appendix
-\section*{Errori per le misure con l'oscilloscopio}
-\err{non penso serva una sezione ma per ora li metto qua.}
-
+\section*{Appendice - Errori per le misure con l'oscilloscopio}
 Assumiamo innanzitutto di apprezzare la mezza tacca dell'oscilloscopio,
-l'errore su ciascuna lettura sarà quindi $\Delta_i = \frac{{\text{F.S.}}_i}{2}$.
-Le misure svolte con l'oscilloscopio sono sempre delle delta tra due valori per
-cui l'incertezza totale è $\Delta = \Delta_1 + \Delta_2$.
-Quando entrambe le misure vengono effettuate sulla stessa scala risulta
-$\Delta = 2 \cdot \frac{\text{F.S.}}{2} = \text{F.S.}$.
-Invece, nel caso di misure di tensione in riferimento alla massa, è stato
-azzerato l'oscilloscopio con fondoscala di \qty{0.04}{\volt}, questo errore è
-sempre ordini di grandezza inferiore all'errore sull'altra misura per cui:
-$\Delta = \Delta_{GND} + \Delta_{val} \approx \Delta_{val}$.
+l'errore su ciascuna lettura sarà quindi $\Delta_i =
+	\frac{{\text{F.S.}}_i}{2}$. Le misure svolte con l'oscilloscopio sono sempre
+delle delta tra due valori per cui l'incertezza totale è $\Delta = \Delta_1 +
+	\Delta_2$. Quando entrambe le misure vengono effettuate sulla stessa scala
+risulta $\Delta = 2 \cdot \frac{\text{F.S.}}{2} = \text{F.S.}$. Invece, nel
+caso di misure di tensione in riferimento alla massa, è stato azzerato
+l'oscilloscopio con fondoscala di \qty{0.04}{\volt}, questo errore è sempre
+ordini di grandezza inferiore all'errore sull'altra misura per cui: $\Delta =
+	\Delta_{GND} + \Delta_{val} \approx \Delta_{val}$.
+
+\err{inserire tabella misure con FS e time/div?}
+
 \end{document}
