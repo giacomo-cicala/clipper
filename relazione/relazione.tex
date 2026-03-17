@@ -221,7 +221,7 @@ stata ripetuta, prima con due diodi al silicio e poi con due diodi al germanio.
 	\includegraphics[width=0.7\textwidth]{onda1.jpg}
 	\caption{Forma dell'onda tosata con diodi al silicio e $V_{R1} = |V_{R2}| =
 		2 \unit{\volt}$. Parametri oscilloscopio: \qty{1}{\volt\per div},
-        \qty{0.2}{\milli\second\per div}.}
+	\qty{0.2}{\milli\second\per div}.}
 	\label{fig:onda}
 \end{figure}
 
@@ -242,7 +242,8 @@ risultata:
 \[
 	V^{pre} = (6.0 \pm 0.1) \ \unit{\volt},
 \]
-mentre quelle post-clipping per silicio e germanio (omettendo l'apice) sono risultate:
+mentre quelle post-clipping per silicio e germanio (omettendo l'apice) sono
+risultate:
 \[
 	V_{Si} = (2.50 \pm 0.05) \ \unit{\volt} \qquad
 	V_{Ge} = (2.20 \pm 0.05) \ \unit{\volt}.
@@ -348,14 +349,13 @@ osservare una diminuzione dell'effetto di taglio sull'onda sinusoidale:
 \section*{Appendice - Errori per le misure con l'oscilloscopio}
 Assumiamo innanzitutto di apprezzare la mezza tacca dell'oscilloscopio,
 l'errore su ciascuna lettura sarà quindi $\Delta_i =
-	\frac{{\text{F.S.}}_i}{2}$. Le misure svolte con l'oscilloscopio sono sempre
+	\frac{{\text{F.S.}}_i}{5} \cdot \frac{1}{2}$. Le misure svolte con l'oscilloscopio sono sempre
 delle delta tra due valori per cui l'incertezza totale è $\Delta = \Delta_1 +
 	\Delta_2$. Quando entrambe le misure vengono effettuate sulla stessa scala
-risulta $\Delta = 2 \cdot \frac{\text{F.S.}}{2} = \text{F.S.}$. Invece, nel
+risulta $\Delta = 2 \cdot \frac{\text{F.S.}}{5} \cdot \frac{1}{2} = \frac{\text{F.S.}}{5}$. Invece, nel
 caso di misure di tensione in riferimento alla massa, è stato azzerato
-l'oscilloscopio con fondoscala di \qty{0.04}{\volt}, questo errore è sempre
+l'oscilloscopio con fondoscala di \qty{50}{\milli\volt}, questo errore è sempre
 ordini di grandezza inferiore all'errore sull'altra misura per cui: $\Delta =
 	\Delta_{GND} + \Delta_{val} \approx \Delta_{val}$.
-
 
 \end{document}
