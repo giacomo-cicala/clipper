@@ -44,8 +44,8 @@
 \maketitle
 
 \begin{abstract}
-	\`E stato realizzato un circuito tosatore a due livelli per ricavare un onda
-	quadra analogica a partire da un onda sinusoidale.
+	\`E stato realizzato un circuito tosatore a due livelli per ricavare un'onda
+	quadra analogica a partire da un'onda sinusoidale.
 	Il circuito è stato realizzato in due varianti: con diodi al silicio e con
 	diodi al germanio.
 	Sono state misurate le semiampiezze pre e post clipping e i tempi di salita e
@@ -63,8 +63,8 @@
 		t^{rise}_{Ge} = (47 \pm 2) \ \unit{\micro\second} \qquad
 		t^{fall}_{Ge} = (47 \pm 2) \ \unit{\micro\second}
 	\]
-	\err{Queste misure hanno confermato il taglio maggiore dei diodi al germanio dovuto
-	alla $V_\gamma$ inferiore}. Si è verificato che l'ampiezza di taglio varia
+	Queste misure hanno confermato il taglio maggiore dei diodi al germanio dovuto
+	alla $V_\gamma$ inferiore. Si è verificato che l'ampiezza di taglio varia
 	proporzionalmente alla tensione $V_R$ di alimentazione del diodo. Infine è
 	stata stimata la resistenza critica $R_c = (25.8 \pm 0.2) \ \unit{\kilo\ohm}$
 	sul ramo di input per cui inizia a diminuire l'effetto di clipping.
@@ -206,12 +206,14 @@ parametri sono stati misurati con l'oscilloscopio ottenendo:
 	\nu = (1.00 \pm 0.04 ) \ \unit{\kilo\hertz}.
 \]
 A questo punto sono stati inseriti i due rami di clipping con i diodi $D_1$ e
-$D_2$; a questo punto variando i potenziometri $R_1$ e $R_2$ sono state
+$D_2$; successivamente variando i potenziometri $R_1$ e $R_2$ sono state
 impostate le tensioni che regolano la soglia di clipping ($V_{R1}$ e $V_{R2}$)
 a: $V_{R1} = (2.004 \pm 0.005)$ \unit{\volt} e $V_{R2} = (-2.004 \pm 0.005)$
-\unit{\volt}. \`E stata quindi osservata sull'oscilloscopio la forma dell'onda
+\unit{\volt}.
+
+\`E stata quindi osservata sull'oscilloscopio la forma dell'onda
 tosata (\cref{fig:onda}) e sono state svolte le misure di semiampiezza
-dell'onda e dei tempi di salita e discesa. L'esperienza è
+dell'onda e dei tempi di salita e discesa. Le misure di semiampiezza sono state effettuate considerando come estremi il ground e il "picco" dell'onda tosata. Invece, le misure dei tempi di salita e discesa sono state effettuate considerando la porzione di segnale compresa tra il $10\%$ e il $90\%$ della semiampiezza, dove in questo lo $0\%$ è stato fissato al ground, mentre il $100\%$ è stato scelto in corrispondenza del "ginocchio" dell'onda tosata, ossia il punto in cui si inizia ad osservare il taglio dell'onda sinusoidale. L'esperienza è
 stata ripetuta, prima con due diodi al silicio e poi con due diodi al germanio.
 
 \begin{figure}[h]
@@ -255,9 +257,6 @@ si possono ricavare $V_\gamma^{Si}$ e $V_\gamma^{Ge}$:
 a quelli al silicio. Ciò segue naturalmente dal fatto che la tensione di soglia
 $V_{\gamma}$ dei diodi al germanio è più bassa rispetto a quella dei diodi al
 silicio.
-\err{Come ulteriore confema le tensioni di soglia ottenute sono compatibili con i
-valori noti per queste tipologie di diodo. cita?}
-
 Per quanto riguarda i tempi di salita e discesa, sono risultati:
 \[
 	t^{rise}_{Si} = (53 \pm 2) \ \unit{\micro\second} \qquad
@@ -273,7 +272,7 @@ per ciascun diodo risultano compatibili tra loro, come ci si aspetta dato che
 il circuito è simmetrico. Inoltre, i tempi di salita e discesa per i diodi al
 germanio risultano più brevi rispetto a quelli dei diodi al silicio. Ciò si può
 spiegare ricordando che il germanio, tosando di più, taglia una porzione
-maggiore dell'onda sinusoidale, e quindi la regione di salita e discesa sono
+maggiore dell'onda sinusoidale, e quindi le regioni di salita e discesa sono
 minori rispetto a quella dei diodi al silicio, per cui i tempi di salita e
 discesa risultano più brevi.
 
@@ -358,6 +357,5 @@ l'oscilloscopio con fondoscala di \qty{0.04}{\volt}, questo errore è sempre
 ordini di grandezza inferiore all'errore sull'altra misura per cui: $\Delta =
 	\Delta_{GND} + \Delta_{val} \approx \Delta_{val}$.
 
-\err{inserire tabella misure con FS e time/div?}
 
 \end{document}
